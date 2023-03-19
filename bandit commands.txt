@@ -1,0 +1,52 @@
+ls                  -> list the file names in current directory
+cat                 -> read the content in given file and print it
+cd                  -> change directory
+pwd                 -> shows in which current directory you are working
+ctrl c              -> come back to the directory if text getting re printed
+cat ./-             -> read file whose name starts with '-'
+cat<-               -> read file whose name starts with '-'
+cat "file_Name "  -> to read file with space in name or long file names
+ls -al            -> to check hidden files exsist or not in that directory
+ls -a             -> to check hidden files exsist or not in that directory
+file ./*          -> to chek file type of file exsist in current directory
+file ./inhere/*   -> if you are in your main directory then it will check file types from all files in directory name "inhere" which is inside main directory
+
+cat  ./file_Name  ->to check text inside that particular file of "file_Name"
+cat ./inhere/"file_name"   -> it will check   text inside file "file_name" which is inside directory name "inhere" which in in main directory.
+                   
+                              ->The most common data encodings that are human-readable are ASCII and Unicode.
+                              ->If we want to apply/use a command on all the files in the current directory, repeating the command or writing all filenames is tedious. 
+                                To use the command on all the files in the directory without a lot of writing, we can use ‘*’, which is called a ‘wildcard symbol’.
+                                ‘*’ can stand for any number of any literal characters. An example could be file*, which would match to everything that starts with ‘file’,
+                                like ‘file00’, ‘file’, ‘fileAA’ and so on. It replaces the filename/path option in the command.
+ 
+find /"properties"                  -> here we did not use "." before forward slash. by doing this we can search through whole root directory or servr.
+find /"properties" 2>/dev/->null    -> a Permission denied error for files that we do not have permission. We can append 2>/dev/null, which will ‘hide’ all error messages 1.
+                                       So what 2>/dev/null does is, it redirects all standard errors like No such file or directory and Permission denied to /dev/null where null acts as a special device which discards all information written to it. 
+                                       Thus we only get the one required file as output which I sent as input to cat to see its contents.
+
+du                                  -> to print size of file
+du -b                               -> to print size of file in byte
+du -a                               -> to print file sizes including hidden files
+
+
+-executable
+-size <byte>cc
+-readable
+! -executable    /* all these4 falgs are applicable aftrer using command "find /"
+
+
+<command> | grep (pattern_to_find)   ->grep can be used to search lines that contain a specific pattern like follow grep <pattern>.
+
+sort "file name"               -> sorts the all lines in givrn file
+sort -u "file_name"            ->
+sort "file_name | uniq -u      ->
+ 
+
+
+strings "file_Name"            -> will print all the human readable strings line wiz in given file
+
+strings "file_Name" | grep "Pattern_Name"     -> will print all the human readable strings and those containing pattern ===. and we want line with multiple equality sign
+
+
+base64 -d "file Name"                   ->for readng base64 chars and give char output (-d is flag for decoding)
