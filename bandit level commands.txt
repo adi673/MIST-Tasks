@@ -1,0 +1,129 @@
+level 0 -> ls ,cat "file_name"
+level 1 -> ls ,cat<-  OR cat ./-
+level 2 -> ls, cat "file_Name"
+level 3 -> in this hidden file exist in the directory "inhere". so we have to change directory to inhere 
+             "
+           and now inside this inhere an hidden file exsist. we can'rt directly access hidden file with ls command. for that we have to use command "ls -a" OR "ls -al"
+           by using this command we can get list of hidden files 
+           
+           here we will see 3 files in which there is one file ".hidden" in that password is stored
+           we will access this file using "cat .hidden" command
+           
+           cd inhere , ls -al OR ls -a , cat .hidden
+
+level 4->  The password for the next level is stored in the only human-readable file in the inhere directory
+           here first we will get inside inhere directory
+           then we will list the all files exsist inside inhere directory
+           
+           and now we have information that file is human readble. so fo that we will find the file type by using command " file ./* " 
+           here we will get to se ASCII file type of "-file07". so we have to get access password from that file. so we will use command  " cat ./-file07 "
+
+level 5-> The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:
+
+             human-readable
+             1033 bytes in size
+             not executable
+          
+           so will go inside inhere directory. now they have gave us properties that human readable, size 1033c and not excutable. so we will use find command to search forthis properties 
+             "find ./ -readable -size 1033c \! -executable" 
+
+level 6->  
+
+
+          this will search correct file for us and give file name matching with this properties.
+          after that by using cat command we will print password in that articular size.
+             "cat ./maybehere07/.file2"
+
+LEVEL 6->  Since we don't know where the file is we will have to search the entire server. We know some properties about the file that we can use to try and locate the file.
+             Similar to the previous level we can use the find command for this task
+
+            owned by user bandit7
+            owned by group bandit6
+            33 bytes in size
+
+            since after putting list command we are not getting any output. means this time fle is not in home directory in in somewhere in server .so we ahve to search entire server
+            means we have to search from root directory for searching in root directory we will use command find / 'Properties'
+            
+             find / -user bandit7 -group bandit6 -size 33c
+
+
+            here we will just  multiple files with permission denied so we have to search for password file throughout every line. and after we will get it we will cat the fle for password 
+            like this.
+            accessible file is -> "/var/lib/dpkg/info/bandit7.password "  so we will ccat this file
+           
+               "cat /var/lib/dpkg/info/bandit7.password "
+
+
+             there also another way exsist to search accesible file is use "2>/dev/null" . bu using this command with comand "file / 'properties' 2>/dev/null" we will directly get that readble fiel
+             and after that we will cat that file . inshort -> will, however, also print a Permission denied error for files that we do not have permission. We can append 2>/dev/null, which will ‘hide’ all error messages 1.
+             So what 2>/dev/null does is, it redirects all standard errors like No such file or directory and Permission denied to /dev/null where null acts as a special device which discards all information written to it. 
+             Thus we only get the one required file as output which I sent as input to cat to see its contents.
+
+               " find / -user bandit7 -group bandit6 -size 33c 2>/dev/null"
+               "cat /var/lib/dpkg/info/bandit7.password"
+                 
+             
+level 7->     first we will as usual list the files. in that we will get data.txt file. and when we will cat this data.txt file we will get to see many strings. 
+              BUT The password for the next level is stored in the file data.txt next to the word millionth   
+              
+
+              The command grep searches its input for lines containing a specific pattern defined by the user. It can also be used to do the opposite, meaning when using the -v flag, a line with a defined pattern will not be printed.
+              To use this command on the output of another command (for example, the file command), we use the pipe |. It takes the output of the first command and pipes it as input into the second command. The syntax could look something like this: <command1> | grep <pattern>.
+                
+              so here we will use command " cat data.txt | grep millionth"
+              so it will print the line which contain word millionth. and as per instriction passowrd is stored jsut next  to word millionth
+
+
+level 8->     first we will sit the files in the dorectory. we will get to see data.txt file here. but condition is  -> The password for the next level is stored in the file data.txt and is the only line of text that occurs only once
+              so for that we have to sort the data and afeter sorting we will get uniq character line
+              sorting means we will print the linkes according to sequence A-Z
+              
+
+ 	      we will use command now "sort data.txt | uniq -u"
+              it will give us the unique line in the file and it will be our password.
+
+level 9->     The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.
+
+              First, we need to distinguish human-readable strings in ‘data.txt’. We use the strings command.
+              Next, we want to filter that output by looking at lines that include more than one equal sign. - Assuming the equal signs and the password are on the same line, we can use grep again (as in Level 6). Since the task was unspecific regarding the number of equal signs, I used 3. 
+              However, next to the password, there are not too many lines with equal signs, so any amount between 1 and 10 would work (however, 2 to 10 would give the same result).
+
+              " strings | grep ===" 
+               This command will give string lines starting with multiple equality sign and character and strings in that line. from that we can identify key
+
+level 10->     The password for the next level is stored in the file data.txt, which contains base64 encoded data.
+            
+               base64 is =Binary to text encoding scheme.
+               letter- >8bit ASCII code of each letter in given line. then divided in group of 6. and end remaining 6 bits are filled with zero. and prints 6bit characters.
+               and typically we can see multiple equal sign a the end because this type of encoding. 
+               
+               so " base64 file_Name" is used to  nad we use -d flag to decode it " base64 -d file_Name"
+
+
+               Base64 is a binary-to-text encoding scheme. It can often be recognised by equal signs at the end of the data. However, this is not always the case. 
+               Linux has a command called base64 that allows for encoding and decoding in Base64. For decoding, we need to use the flag -d.
+
+  "" REad more about base64 encoding""
+
+level 11->    
+
+
+
+
+
+level 12->    The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work using mkdir.
+              For example: mkdir /tmp/myname123. Then copy the datafile using cp, and rename it using mv (read the manpages!)
+
+
+               "Hexdumps are often used when we want to look at data that cannot be represented in strings and therefore is not readable, so it is easier to look at the hex values. A hexdump has three main columns. The first shows the address, 
+                the second the hex representation of the data on that address and the last shows the actual data as strings (with ‘.’ being hex values that cannot be represented as a string). Many hex editors exist just pick the one you like most."
+
+               1] so first we will create directory by " mkdir /tmp/adi673 " this will make a new directory in current directory.
+               2] after that we will copy the file data.txt from current directory to directory /tmp/adi673 
+               3] after that we will move int directory /tmp/adi673
+               4] Here we will first revert hex dump file to inside file file name data  by command "xxd -r data.txt > data"  -r flag is used to revert the operation.
+               5]here after checking ls we will see file with name data. we will check fiel type by using file command for this file we got. we will get gzip compressed data, was "data2.bin". means 
+                  file is currently in compressed condition in .gzip form. so we will convert that data file in the form of data.gz" by using the command "mv data data.gz"
+               6]adter this we will decompress new file created data.gz by command "gzip -fl9   
+               # do this whole again to clear concept
+
