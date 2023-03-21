@@ -124,6 +124,15 @@ level 12->    The password for the next level is stored in the file data.txt, wh
                4] Here we will first revert hex dump file to inside file file name data  by command "xxd -r data.txt > data"  -r flag is used to revert the operation.
                5]here after checking ls we will see file with name data. we will check fiel type by using file command for this file we got. we will get gzip compressed data, was "data2.bin". means 
                   file is currently in compressed condition in .gzip form. so we will convert that data file in the form of data.gz" by using the command "mv data data.gz"
-               6]adter this we will decompress new file created data.gz by command "gzip -fl9   
+               6]after this we will decompress new file created data.gz by command "gzip -d file_name"   
                # do this whole again to clear concept
 
+               Compression is a method of encoding that aims to reduce the original size of a file without losing information (or only losing as little as possible).
+
+               gzip is a command to compress or decompress (-d) files. A ‘gzip’ file generally ends with .gz.
+               bzip2 is another command which allows for compressing and decompressing (-d) files. A ‘bzip2’ file generally ends with .bz2.
+               An Archive File is a file that contains one or multiple files and their metadata. This can allow easier portability.
+               tar is a command that creates archive files (-cf). It also allows extracting these files again (-xf). A tar archive generally ends with .tar.
+
+
+level 13]
