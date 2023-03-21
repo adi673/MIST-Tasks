@@ -50,3 +50,11 @@ strings "file_Name" | grep "Pattern_Name"     -> will print all the human readab
 
 
 base64 -d "file Name"                   ->for readng base64 chars and give char output (-d is flag for decoding)
+
+mv "input_file_name" "output_file_name"  -> to rename the file 
+
+tar -xf "file_name"   -> to decrypt the give file in .tar format
+
+gzip -d  "file_name"  -> to decrypt the given file in .gzip format
+
+bizp2 -d "file_name"  -> to decrypt the give file in .bz2 format
